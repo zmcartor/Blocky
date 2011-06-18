@@ -1,0 +1,52 @@
+Blocky: Client-side QR codes with <canvas> and CoffeScript!
+
+Author: Zach McArtor
+hackazach.net
+
+(C) CopyRight Zach McArtor
+Licensed under the MIT license:
+http://www.opensource.org/licenses/mit-license.php
+
+v1.0 17/6/2011
+
+Dependencies:
+	To use, you will need to include the awesome QR library from Kazuhiko Arasé
+	http://www.d-project.com/qrcode/index.html
+
+Installation:
+	The compiled javascript is included from the associated .coffee file. 
+	Include this in your page after qrcode.js (Kazuhiko's library)
+
+Usage:
+
+	All you need to do is make a new Blocky!
+
+	<script type ="text/javascript">
+		new Blocky('http://hackazach.net' ,'funfun', {cell_size:11, scriptheme:'watermelon'})
+	</script>
+
+Constructor Arguments:
+	new Blocky( QR_code_message, id_of_container , config_object)
+
+	A <canvas> element is appended to the container.
+
+The config object takes the following values:
+
+	cell_size: the size of the QR cells. Generally just think of it as the size of the QR code. Default 4.
+	black: the color to use as 'black' in the QR code. pass as a quoted rgb value like "rgb(1,2,3)"
+	white: just like black, only... white.
+	error_level: the QR error level to use. Acceptable values: M , H , Q, L. Default H
+
+Color schemes
+	There are a couple pre-built color schemes for fun.
+	try scheme names watermelon , wedding, arctic or spicy
+
+
+Have fun!
+_Zach
+
+
+
+
+
+
