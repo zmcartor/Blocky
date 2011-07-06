@@ -17,19 +17,17 @@
         this.container = window.document.getElementById(container);
       }
       if (!this.container) {
-        console.log('invalid container');
-        return;
+        throw new Error("Invalid Container for QR Canvas");
       }
       if (!text) {
-        console.log('please provide some text for the QR code!');
+        throw new Error("No content for QR code");
       }
       this.cell_size = config.cell_size || 4;
       this.black = config.black || "rgb(0,0,0)";
       this.white = config.white || "rgb(255,255,255)";
-      this.type_number = config.typenumber || 6;
+      this.type_number = config.typenumber || 10;
       this.error_level = config.error_level || 'M';
-      ((_ref = this.error_level.charAt(0).toUpperCase) === 'm' || _ref === 'h' || _ref === 'q' || _ref === 'l') || 'H';
-      text = text;
+      ((_ref = this.error_level.charAt(0).toUpperCase) === 'M' || _ref === 'H' || _ref === 'Q' || _ref === 'L') || 'M';
       if ((_ref2 = config.scheme) === 'watermelon' || _ref2 === 'wedding' || _ref2 === 'arctic' || _ref2 === 'spicy') {
         switch (config.scheme) {
           case 'watermelon':
@@ -55,7 +53,7 @@
         return;
       }
       this.context = canvas.getContext('2d');
-      this.das_code = new QRCode(this.type_number, QRErrorCorrectLevel.H);
+      this.das_code = new QRCode(this.type_number, QRErrorCorrectLevel.L);
       this.das_code.addData(text);
       this.das_code.make();
       canvas_size = this.das_code.getModuleCount() * this.cell_size;

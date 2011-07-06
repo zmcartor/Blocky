@@ -3,21 +3,19 @@ window.Blocky = class Blocky
 		if container
 			@container=window.document.getElementById(container)
 		if not @container
-			console.log 'invalid container'
-			return
+			throw new Error "Invalid Container for QR Canvas"
 		if not text
-			console.log 'please provide some text for the QR code!'
+			throw new Error "No content for QR code"
 
 		#QR code default settings. Can be overridden via config array.
 		@cell_size = config.cell_size or 4
 		@black = config.black or "rgb(0,0,0)"
 		@white = config.white or "rgb(255,255,255)"
-		@type_number = config.typenumber or 6
+		#type and error level control how much information we can encode.
+		@type_number = config.typenumber or 10 
 		@error_level = config.error_level or 'M'
 		#in case they put something stupid
-		@error_level.charAt(0).toUpperCase in ['m', 'h', 'q' ,'l'] or 'H' 
-		text = text
-
+		@error_level.charAt(0).toUpperCase in ['M', 'H', 'Q' ,'L'] or 'M' 
 		#some fun preset colors! :D
 		if config.scheme in ['watermelon' , 'wedding' , 'arctic' , 'spicy']
 			switch config.scheme
@@ -37,7 +35,7 @@ window.Blocky = class Blocky
 
 		@context = canvas.getContext '2d'
 		
-		@das_code = new QRCode @type_number , QRErrorCorrectLevel.H 
+		@das_code = new QRCode @type_number , QRErrorCorrectLevel.L
 		@das_code.addData text
 		@das_code.make()
 
