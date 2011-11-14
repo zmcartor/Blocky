@@ -35,7 +35,7 @@ window.Blocky = class Blocky
 
 		@context = canvas.getContext '2d'
 		
-		@das_code = new QRCode @type_number , QRErrorCorrectLevel.L
+		@das_code = new qrcode @type_number ,'L'
 		@das_code.addData text
 		@das_code.make()
 

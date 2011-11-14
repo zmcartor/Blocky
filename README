@@ -12,6 +12,7 @@ v1.0 17/6/2011
 Dependencies:
 	To use, you will need to include the awesome QR library from Kazuhiko Arasé
 	http://www.d-project.com/qrcode/index.html
+	The JS library after the 11/5/2011 update is included within this project.
 
 Installation:
 	The compiled javascript is included from the associated .coffee file. 

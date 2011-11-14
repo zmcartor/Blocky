@@ -1,27 +1,17 @@
 (function() {
   var Blocky;
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
   window.Blocky = Blocky = (function() {
+
     function Blocky(text, container, config) {
       var c, canvas, canvas_size, limit, r, _fn, _ref, _ref2;
-      if (text == null) {
-        text = null;
-      }
-      if (container == null) {
-        container = null;
-      }
-      if (config == null) {
-        config = {};
-      }
-      if (container) {
-        this.container = window.document.getElementById(container);
-      }
-      if (!this.container) {
-        throw new Error("Invalid Container for QR Canvas");
-      }
-      if (!text) {
-        throw new Error("No content for QR code");
-      }
+      var _this = this;
+      if (text == null) text = null;
+      if (container == null) container = null;
+      if (config == null) config = {};
+      if (container) this.container = window.document.getElementById(container);
+      if (!this.container) throw new Error("Invalid Container for QR Canvas");
+      if (!text) throw new Error("No content for QR code");
       this.cell_size = config.cell_size || 4;
       this.black = config.black || "rgb(0,0,0)";
       this.white = config.white || "rgb(255,255,255)";
@@ -53,7 +43,7 @@
         return;
       }
       this.context = canvas.getContext('2d');
-      this.das_code = new QRCode(this.type_number, QRErrorCorrectLevel.L);
+      this.das_code = new qrcode(this.type_number, 'L');
       this.das_code.addData(text);
       this.das_code.make();
       canvas_size = this.das_code.getModuleCount() * this.cell_size;
@@ -63,14 +53,14 @@
       limit = this.das_code.getModuleCount();
       if (canvas.getContext) {
         for (r = 0; 0 <= limit ? r < limit : r > limit; 0 <= limit ? r++ : r--) {
-          _fn = __bind(function(r, c) {
-            if (this.das_code.isDark(r, c)) {
-              this.context.fillStyle = this.black;
+          _fn = function(r, c) {
+            if (_this.das_code.isDark(r, c)) {
+              _this.context.fillStyle = _this.black;
             } else {
-              this.context.fillStyle = this.white;
+              _this.context.fillStyle = _this.white;
             }
-            return this.context.fillRect(c * this.cell_size, r * this.cell_size, this.cell_size, this.cell_size);
-          }, this);
+            return _this.context.fillRect(c * _this.cell_size, r * _this.cell_size, _this.cell_size, _this.cell_size);
+          };
           for (c = 0; 0 <= limit ? c < limit : c > limit; 0 <= limit ? c++ : c--) {
             _fn(r, c);
           }
@@ -79,6 +69,9 @@
         console.log("no getContext.., cannot proceed.");
       }
     }
+
     return Blocky;
+
   })();
+
 }).call(this);
