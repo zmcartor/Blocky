@@ -1,4 +1,4 @@
-window.Blocky = class Blocky 
+window.Blocky = class Blocky
 	constructor: (text = null ,container=null, config={}) ->
 		if container
 			@container=window.document.getElementById(container)
@@ -12,10 +12,10 @@ window.Blocky = class Blocky
 		@black = config.black or "rgb(0,0,0)"
 		@white = config.white or "rgb(255,255,255)"
 		#type and error level control how much information we can encode.
-		@type_number = config.typenumber or 10 
+		@type_number = config.typenumber or 10
 		@error_level = config.error_level or 'M'
 		#in case they put something stupid
-		@error_level.charAt(0).toUpperCase in ['M', 'H', 'Q' ,'L'] or 'M' 
+		@error_level.charAt(0).toUpperCase in ['M', 'H', 'Q' ,'L'] or 'M'
 		#some fun preset colors! :D
 		if config.scheme in ['watermelon' , 'wedding' , 'arctic' , 'spicy']
 			switch config.scheme
@@ -34,7 +34,7 @@ window.Blocky = class Blocky
 			return
 
 		@context = canvas.getContext '2d'
-		
+
 		@das_code = new qrcode @type_number ,'L'
 		@das_code.addData text
 		@das_code.make()
@@ -44,7 +44,7 @@ window.Blocky = class Blocky
 		canvas.setAttribute 'height' , canvas_size
 		@container.appendChild canvas
 
-		#big main loops to build the QR code 
+		#big main loops to build the QR code
 		limit= @das_code.getModuleCount()
 
 		if canvas.getContext
@@ -56,6 +56,6 @@ window.Blocky = class Blocky
 						else
 							@context.fillStyle = @white
 						@context.fillRect c*@cell_size , r*@cell_size , @cell_size, @cell_size
-						
+
 		else
 			console.log "no getContext.., cannot proceed."
