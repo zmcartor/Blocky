@@ -15,7 +15,7 @@ Dependencies:
 	The JS library after the 11/5/2011 update is included within this project.
 
 Installation:
-	The compiled javascript is included from the associated .coffee file. 
+	The compiled javascript is included from the associated .coffee file.
 	Include this in your page after qrcode.js (Kazuhiko's library)
 
 Usage:
